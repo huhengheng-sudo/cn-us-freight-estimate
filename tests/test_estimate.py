@@ -391,8 +391,10 @@ def _console_scripts():
 
 def test_console_script_entry_point_and_module():
     matches = [item for item in _console_scripts() if item.name == "cn-us-freight"]
-    assert len(matches) == 1
-    assert matches[0].value == "cn_us_freight.cli:main"
+    # Editable installs on Python 3.9 can list the same console script twice.
+    # The installed target still has to be this package's CLI, once or twice.
+    assert matches
+    assert {item.value for item in matches} == {"cn_us_freight.cli:main"}
 
     module = subprocess.run(
         [
