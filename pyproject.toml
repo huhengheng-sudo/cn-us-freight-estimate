@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cn-us-freight"
+dynamic = ["version"]
+description = "Illustrative China to United States air and sea freight estimator."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "huhengheng-sudo" }]
+keywords = ["freight", "shipping", "logistics", "china", "air", "sea"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+]
+[project.urls]
+Repository = "https://github.com/huhengheng-sudo/cn-us-freight-estimate"
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+cn-us-freight = "cn_us_freight.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "cn_us_freight.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cn_us_freight = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
